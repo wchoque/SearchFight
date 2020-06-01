@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Tranzact.Cignium.SearchFight.Base\Tranzact.Cignium.SearchFight.Base.csproj" />
+    <ProjectReference Include="..\Tranzact.Cignium.SearchFight.Core\Tranzact.Cignium.SearchFight.Core.csproj" />
+  </ItemGroup>
+
+</Project>
