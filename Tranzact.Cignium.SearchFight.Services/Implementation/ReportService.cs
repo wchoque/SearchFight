@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text;
 using Tranzact.Cignium.SearchFight.Services.Contracts;
 using Tranzact.Cignium.SearchFight.Services.DTOs;
 
@@ -10,20 +8,23 @@ namespace Tranzact.Cignium.SearchFight.Services.Implementation
 {
     public class ReportService : IReportService
     {
+        #region Properties
         public IList<Report> Reports { get; set; }
-        private IList<IReportEngine> ReportEngines;
+        private readonly IList<IReportEngine> ReportEngines;
+        #endregion
 
         public ReportService() {
             ReportEngines = GetImplementedSearchEngines();
             Reports = new List<Report>();
         }
 
+        /// <summary>
+        /// Get classes that implemented the interface IReportEngine
+        /// </summary>
+        /// <returns></returns>
         private IList<IReportEngine> GetImplementedSearchEngines()
         {
-            IEnumerable<Assembly> loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies()
-               ?.Where(assembly => assembly.FullName.StartsWith("Tranzact.Cignium.SearchFight"));
-
-            return loadedAssemblies
+            return AppDomain.CurrentDomain.GetAssemblies()?.Where(assembly => assembly.FullName.StartsWith("Tranzact.Cignium.SearchFight"))
                 .SelectMany(assembly => assembly.GetTypes())
                 .Where(type => type.GetInterface(typeof(IReportEngine).ToString()) != null)
                 .Select(type => Activator.CreateInstance(type) as IReportEngine).ToList();
@@ -36,6 +37,5 @@ namespace Tranzact.Cignium.SearchFight.Services.Implementation
                 Reports.Add(new Report() { Name = report.Name, Result = report.GetReport(searchResponse) });
             }
         }
-
     }
 }

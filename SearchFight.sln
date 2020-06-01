@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tranzact.Cignium.SearchFigh
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tranzact.Cignium.SearchFight.Services", "Tranzact.Cignium.SearchFight.Services\Tranzact.Cignium.SearchFight.Services.csproj", "{BC585B06-7974-48AC-9645-8260A837C11F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{6665FACF-A72D-4214-A1AE-BDB2167BD5F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

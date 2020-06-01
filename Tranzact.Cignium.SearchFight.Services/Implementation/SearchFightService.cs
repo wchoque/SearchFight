@@ -14,7 +14,6 @@ namespace Tranzact.Cignium.SearchFight.Services.Implementation
         #region Attributes
         private List<Report> Reports { get; set; }
         #endregion
-
         #region Services
         private readonly ISearchService SearchService;
         private readonly IReportService ReportService;

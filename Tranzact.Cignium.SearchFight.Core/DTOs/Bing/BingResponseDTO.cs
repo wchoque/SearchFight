@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Tranzact.Cignium.SearchFight.Core.Models.Bing
+﻿namespace Tranzact.Cignium.SearchFight.Core.DTOs
 {
     public class BingResponseDTO
     {

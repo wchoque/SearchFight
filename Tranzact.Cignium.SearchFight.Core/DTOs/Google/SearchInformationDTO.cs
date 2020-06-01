@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Tranzact.Cignium.SearchFight.Core.Models.Google
+﻿namespace Tranzact.Cignium.SearchFight.Core.DTOs
 {
     public class SearchInformationDTO
     {

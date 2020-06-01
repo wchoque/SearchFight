@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Tranzact.Cignium.SearchFight.Services.Contracts;
 using Tranzact.Cignium.SearchFight.Services.DTOs;
 
@@ -9,8 +8,10 @@ namespace Tranzact.Cignium.SearchFight.Services.Implementation
 {
     public class ReportTermResult : IReportEngine
     {
+        #region Properties
         public string Name { get => "Detail engine by term"; }
         public int OrderPrint { get => 1; }
+        #endregion
 
         public string GetReport(IList<SearchResponseDTO> searchResponse)
         {

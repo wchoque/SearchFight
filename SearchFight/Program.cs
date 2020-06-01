@@ -9,20 +9,26 @@ namespace SearchFight
 {
     class Program
     {
+        /// <summary>
+        /// The Main method is the entry point of the program
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
-            //if (args.Length == 0)
-            //{
-            //    Console.WriteLine("No terms were specified for the Search Fight. Please execute again with the search terms.");
-            //    return;
-            //}
-            Console.WriteLine("Executing Search Fight....");
-            Console.WriteLine("Type words you want to compare");
-            var searchableWords = Console.ReadLine();
-            args = searchableWords.Split(" ");
+            if (args.Length == 0)
+            {
+                Console.WriteLine("No terms were specified for the Search Fight. Please, try again with the search terms.");
+                return;
+            }
             MainAsync(args).GetAwaiter().GetResult();
             Console.Read();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
         static async Task MainAsync(string[] args)
         {
             var services = new ServiceCollection();

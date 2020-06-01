@@ -9,6 +9,11 @@ namespace SearchFight.Register
 {
     public static class IOCRegister
     {
+        /// <summary>
+        /// Extension method to implement dependency injection
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
         public static IServiceCollection AddRegistration(this IServiceCollection services)
         {
             RegisterServices(services);
@@ -16,6 +21,11 @@ namespace SearchFight.Register
             return services;
         }
 
+        /// <summary>
+        /// Register interfaces and services
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
         private static IServiceCollection RegisterServices(IServiceCollection services)
         {
             services.AddSingleton<ISearchService, SearchService>();

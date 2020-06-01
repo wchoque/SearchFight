@@ -6,18 +6,25 @@ using System.Threading.Tasks;
 using Tranzact.Cignium.SearchFight.Base;
 using Tranzact.Cignium.SearchFight.Core.Config;
 using Tranzact.Cignium.SearchFight.Core.Contracts;
-using Tranzact.Cignium.SearchFight.Core.Models.Google;
+using Tranzact.Cignium.SearchFight.Core.DTOs;
 
 namespace Tranzact.Cignium.SearchFight.Core.Implementation
 {
+    /// <summary>
+    /// Implements google search engine
+    /// </summary>
     public class GoogleSearchEngine : ISearchEngine
     {
+        #region properties
         public string Name => "Google";
         private HttpClient _client { get; }
+        #endregion
+
         public GoogleSearchEngine()
         {
             _client = new HttpClient();
         }
+
         public async Task<long> GetTotalResultsAsync(string query)
         {
             if (string.IsNullOrEmpty(query))
@@ -27,15 +34,12 @@ namespace Tranzact.Cignium.SearchFight.Core.Implementation
                 .Replace("{ContextId}", GoogleConfig.ContextId)
                 .Replace("{Query}", query);
 
-            using (var response = await _client.GetAsync(searchRequest))
-            {
-                if (!response.IsSuccessStatusCode)
-                    throw new Exception("We weren't able to process your request. Please try again later.");
-                var val = await response.Content.ReadAsStringAsync();
-                GoogleResponseDTO results = (await response.Content.ReadAsStringAsync()).MapTo<GoogleResponseDTO>();
-                return long.Parse(results.SearchInformation.TotalResults);
-                //return results.SearchInformation.TotalResults;
-            }
+            using var response = await _client.GetAsync(searchRequest);
+            if (!response.IsSuccessStatusCode)
+                throw new Exception("Sorry, we are not able to process your request. Please try again later.");
+
+            GoogleResponseDTO results = (await response.Content.ReadAsStringAsync()).MapTo<GoogleResponseDTO>();
+            return long.Parse(results.SearchInformation.TotalResults);
         }
     }
 }

@@ -10,9 +10,14 @@ namespace Tranzact.Cignium.SearchFight.Services.Implementation
 {
     public class ReportTotalWinnerTerm : IReportEngine
     {
+        #region Properties
         public string Name => "Total winner term";
-
         public int OrderPrint => 3;
+        #endregion
+
+        public ReportTotalWinnerTerm() { 
+
+        }
 
         public string GetReport(IList<SearchResponseDTO> searchResponse)
         {

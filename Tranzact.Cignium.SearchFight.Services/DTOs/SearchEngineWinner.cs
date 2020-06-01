@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Tranzact.Cignium.SearchFight.Services.DTOs
+﻿namespace Tranzact.Cignium.SearchFight.Services.DTOs
 {
     public class SearchEngineWinner
     {
