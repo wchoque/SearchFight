@@ -15,10 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="NUnit" Version="3.12.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.16.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
@@ -26,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Tranzact.Cignium.SearchFight.Core\Tranzact.Cignium.SearchFight.Core.csproj" />
+    <ProjectReference Include="..\Tranzact.Cignium.SearchFight.Services\Tranzact.Cignium.SearchFight.Services.csproj" />
   </ItemGroup>
 
 </Project>
