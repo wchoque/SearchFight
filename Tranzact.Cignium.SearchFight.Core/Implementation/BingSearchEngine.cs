@@ -16,11 +16,18 @@ namespace Tranzact.Cignium.SearchFight.Core.Implementation
         #region properties
         public string Name => "Bing";
         private readonly HttpClient _client;
+        private readonly BingConfig _bingConfig;
         #endregion
 
         public BingSearchEngine()
         {
-            _client = new HttpClient { DefaultRequestHeaders = { { "Ocp-Apim-Subscription-Key", BingConfig.ApiKey } } };
+            _bingConfig = new BingConfig(new AppConfig());
+            _client = new HttpClient { DefaultRequestHeaders = { { "Ocp-Apim-Subscription-Key", _bingConfig.ApiKey } } };
+        }
+        public BingSearchEngine(IAppConfig appConfig)
+        {
+            _bingConfig = new BingConfig(appConfig);
+            _client = new HttpClient { DefaultRequestHeaders = { { "Ocp-Apim-Subscription-Key", _bingConfig.ApiKey } } };
         }
 
         public async Task<long> GetTotalResultsAsync(string query)
@@ -28,7 +35,7 @@ namespace Tranzact.Cignium.SearchFight.Core.Implementation
             if (string.IsNullOrEmpty(query)) 
                 throw new ArgumentException("The specified parameter is invalid.", nameof(query));
 
-            string searchRequest = BingConfig.BaseUrl.Replace("{Query}", query);
+            string searchRequest = _bingConfig.BaseUrl.Replace("{Query}", query);
 
             using var response = await _client.GetAsync(searchRequest);
             if (!response.IsSuccessStatusCode)

@@ -23,7 +23,7 @@ namespace Tranzact.Cignium.SearchFight.Services.Implementation
                ?.Where(assembly => assembly.FullName.StartsWith("Tranzact.Cignium.SearchFight"))
                 .SelectMany(assembly => assembly.GetTypes())
                 .Where(type => type.GetInterface(typeof(ISearchEngine).ToString()) != null)
-                .Select(type => Activator.CreateInstance(type) as ISearchEngine).ToList();
+                .Select(type => (ISearchEngine)Activator.CreateInstance(type)).ToList();
         }
 
         public async Task<IList<SearchResponseDTO>> GetResults(IList<string> terms)

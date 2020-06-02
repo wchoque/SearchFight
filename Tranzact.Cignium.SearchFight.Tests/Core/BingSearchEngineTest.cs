@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Threading.Tasks;
+using Tranzact.Cignium.SearchFight.Core.Config;
 using Tranzact.Cignium.SearchFight.Core.Contracts;
 using Tranzact.Cignium.SearchFight.Core.Implementation;
 
@@ -12,6 +13,7 @@ namespace Tranzact.Cignium.SearchFight.Tests.Core
         #region Attributes
 
         private ISearchEngine _searchEngine;
+        private IAppConfig _appConfig;
 
         #endregion
 
@@ -20,7 +22,8 @@ namespace Tranzact.Cignium.SearchFight.Tests.Core
         [SetUp]
         public void SetUp()
         {
-            _searchEngine = new BingSearchEngine();
+            _appConfig = new AppConfig();
+            _searchEngine = new BingSearchEngine(_appConfig);
         }
 
         #endregion

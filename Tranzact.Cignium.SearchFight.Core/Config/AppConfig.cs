@@ -5,28 +5,30 @@ using System.IO;
 
 namespace Tranzact.Cignium.SearchFight.Core.Config
 {
-    public class BaseConfig
+    public class AppConfig : IAppConfig
     {
         private const string MISSING_CONFIGURATION = "There was an isue with the configuration file. (Missing Value: {Key})";
-        
+        private readonly IConfiguration _configuracion;
+        public AppConfig() {
+            _configuracion = new ConfigurationBuilder()
+            .SetBasePath(Path.Combine(AppContext.BaseDirectory))
+            .AddJsonFile("appsettings.json", true, true)
+            .Build();
+        }
+
         /// <summary>
         /// Get value from configuration file
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static string GetFromConfiguration(string key)
+        public string GetFromConfiguration(string key)
         {
-           IConfiguration config = new ConfigurationBuilder()
-             .SetBasePath(Path.Combine(AppContext.BaseDirectory))
-             .AddJsonFile("appsettings.json", true, true)
-             .Build();
+            var value = _configuracion.GetSection("SearchEngineSettings")[key];
 
-            var configurationValue = config.GetSection("SearchEngineSettings")[key];
-
-            if (string.IsNullOrEmpty(configurationValue))
+            if (string.IsNullOrEmpty(value))
                 throw new ConfigurationErrorsException(MISSING_CONFIGURATION.Replace("{Key}", key));
 
-            return configurationValue;
+            return value;
         }
     }
 }

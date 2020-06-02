@@ -18,10 +18,17 @@ namespace Tranzact.Cignium.SearchFight.Core.Implementation
         #region properties
         public string Name => "Google";
         private HttpClient _client { get; }
+        private readonly GoogleConfig _googleConfig;
         #endregion
-
         public GoogleSearchEngine()
         {
+            _googleConfig = new GoogleConfig(new AppConfig());
+            _client = new HttpClient();
+        }
+
+        public GoogleSearchEngine(IAppConfig appConfig)
+        {
+            _googleConfig = new GoogleConfig(appConfig);
             _client = new HttpClient();
         }
 
@@ -30,8 +37,8 @@ namespace Tranzact.Cignium.SearchFight.Core.Implementation
             if (string.IsNullOrEmpty(query))
                 throw new ArgumentException("The specified parameter is invalid.", nameof(query));
 
-            string searchRequest = GoogleConfig.BaseUrl.Replace("{Key}", GoogleConfig.ApiKey)
-                .Replace("{ContextId}", GoogleConfig.ContextId)
+            string searchRequest = _googleConfig.BaseUrl.Replace("{Key}", _googleConfig.ApiKey)
+                .Replace("{ContextId}", _googleConfig.ContextId)
                 .Replace("{Query}", query);
 
             using var response = await _client.GetAsync(searchRequest);

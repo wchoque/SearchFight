@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Tranzact.Cignium.SearchFight.Core.Config;
 using Tranzact.Cignium.SearchFight.Services.Contracts;
 using Tranzact.Cignium.SearchFight.Services.Implementation;
 
@@ -36,7 +37,7 @@ namespace SearchFight.Register
 
         private static IServiceCollection RegisterOthers(IServiceCollection services)
         {
-            //services.AddTransient<IAppConfig, AppConfig>();
+            services.AddSingleton<IAppConfig, AppConfig>();
             return services;
         }
     }
